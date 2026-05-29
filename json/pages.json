@@ -1,0 +1,18 @@
+[
+    {
+        "title": "Home",
+        "url": "app/views/pages/index.php"
+    },
+    {
+        "title": "About",
+        "url": "app/views/pages/about.php"
+    },
+    {
+        "title": "Contact",
+        "url": "app/views/pages/contact.php"
+    },
+    {
+        "title": "Hi",
+        "url": "app/views/pages/hi.php"
+    }
+]

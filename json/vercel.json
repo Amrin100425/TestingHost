@@ -1,0 +1,38 @@
+{
+    "version": 2,
+    "framework": null,
+    "functions": {
+        "**/*.php": {
+            "runtime": "vercel-php@0.6.0"
+        }
+    },
+    "routes": [
+        {
+            "src": "/public/css/(.*)",
+            "dest": "/public/css/$1"
+        },
+        {
+            "src": "/public/json/(.*)",
+            "dest": "/public/json/$1"
+        },
+        {
+            "src": "/cms/app/controllers/(.*\\.php)",
+            "dest": "/app/controllers/$1"
+        },
+        {
+            "src": "/cms/Photos/uploads/(.*)",
+            "dest": "/Photos/uploads/$1"
+        },
+        {
+            "src": "/(.*\\.php)",
+            "dest": "/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/public/index.php"
+        }
+    ],
+    "env": {
+        "APP_ENV": "production"
+    }
+}
