@@ -2,7 +2,13 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "**/*.php": {
+        "public/index.php": {
+            "runtime": "vercel-php@0.6.0"
+        },
+        "app/**/*.php": {
+            "runtime": "vercel-php@0.6.0"
+        },
+        "login.php": {
             "runtime": "vercel-php@0.6.0"
         }
     },
@@ -16,14 +22,6 @@
             "dest": "/public/json/$1"
         },
         {
-            "src": "/cms/app/controllers/(.*\\.php)",
-            "dest": "/app/controllers/$1"
-        },
-        {
-            "src": "/cms/Photos/uploads/(.*)",
-            "dest": "/Photos/uploads/$1"
-        },
-        {
             "src": "/(.*\\.php)",
             "dest": "/$1"
         },
@@ -31,8 +29,5 @@
             "src": "/(.*)",
             "dest": "/public/index.php"
         }
-    ],
-    "env": {
-        "APP_ENV": "production"
-    }
+    ]
 }
