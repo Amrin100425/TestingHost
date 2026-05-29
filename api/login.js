@@ -6,9 +6,7 @@ module.exports = async (req, res) => {
   if (req.method !== "POST")
     return res.status(405).json({ error: "Method not allowed" });
 
-  const { username, password } =
-    typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
-
+  const { username, password } = req.body || {};
   if (!username || !password)
     return res.status(400).json({ error: "Username and password required" });
 
@@ -25,6 +23,6 @@ module.exports = async (req, res) => {
       .json({ token, username: user.username, role: user.role });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: err.message }); // shows real error
+    return res.status(500).json({ error: err.message }); // ← shows real error
   }
 };

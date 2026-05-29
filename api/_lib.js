@@ -22,7 +22,7 @@ function signToken(payload) {
 }
 
 function verifyToken(req) {
-  const auth = req.headers["authorization"] || "";
+  const auth = req.headers["authorization"] || ""; // ← fixes the crash
   const token = auth.startsWith("Bearer ") ? auth.slice(7) : null;
   if (!token) return null;
   try {
