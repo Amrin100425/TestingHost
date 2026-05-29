@@ -1,24 +1,19 @@
-// api/_lib.js  — shared DB connection and JWT helpers
-const mysql = require("mysql2/promise");
+const { MongoClient } = require("mongodb");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT_SECRET || "change-me-in-vercel-env";
 
 // ── Database ──────────────────────────────────────────────────────────────────
-let pool;
-function getDb() {
-  if (!pool) {
-    pool = mysql.createPool({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME,
-      ssl: { rejectUnauthorized: true }, // PlanetScale requires SSL
-      waitForConnections: true,
-      connectionLimit: 5,
-    });
+let client;
+let db;
+
+async function getDb() {
+  if (!db) {
+    client = new MongoClient(process.env.MONGODB_URI);
+    await client.connect();
+    db = client.db("cms");
   }
-  return pool;
+  return db;
 }
 
 // ── JWT helpers ───────────────────────────────────────────────────────────────
@@ -37,7 +32,7 @@ function verifyToken(req) {
   }
 }
 
-// ── CORS headers (allows your Vercel frontend domain) ─────────────────────────
+// ── CORS headers ──────────────────────────────────────────────────────────────
 function cors(res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
